@@ -1,6 +1,5 @@
 ﻿
-
-CREATE TABLE ncvhis11 (
+CREATE TABLE ncvhis (
     ncid varchar   NOT NULL,
     county_id int   NOT NULL,
     county_desc varchar   NOT NULL,
@@ -15,16 +14,14 @@ CREATE TABLE ncvhis11 (
     voted_county_id varchar   NOT NULL,
     voted_county_desc varchar   NOT NULL,
     vtd_label varchar   NOT NULL,
-    vtd_description varchar   NOT NULL
+    vtd_description varchar   NOT NULL,
+    CONSTRAINT pk_ncvhis PRIMARY KEY (
+        ncid
+     )
 );
 
-CREATE TABLE ncvoter11 (
-    county_id int   NOT NULL,
-    voter_reg_num char   NOT NULL,
-    status_cd char   NOT NULL,
-    voter_status_desc varchar   NOT NULL,
-    reason_cd varchar   NOT NULL,
-    voter_status_reason_desc varchar   NOT NULL,
+CREATE TABLE ncvoterdemo (
+    ncid varchar   NOT NULL,
     last_name varchar   NOT NULL,
     first_name varchar   NOT NULL,
     middle_name varchar   NOT NULL,
@@ -41,14 +38,30 @@ CREATE TABLE ncvoter11 (
     mail_state varchar   NOT NULL,
     mail_zipcode char   NOT NULL,
     full_phone_number varchar   NOT NULL,
+    confidential_ind char   NOT NULL,
+    birth_year char   NOT NULL,
+    drivers_lic char   NOT NULL
+);
+
+CREATE TABLE ncvoterstatus (
+    ncid varchar   NOT NULL,
+    county_id int   NOT NULL,
+    voter_reg_num char   NOT NULL,
+    status_cd char   NOT NULL,
+    voter_status_desc varchar   NOT NULL,
+    reason_cd varchar   NOT NULL,
+    voter_status_reason_desc varchar   NOT NULL,
     race_code char   NOT NULL,
     ethnic_code char   NOT NULL,
     party_cd char   NOT NULL,
     gender_code char   NOT NULL,
     birth_age int   NOT NULL,
     birth_state varchar   NOT NULL,
-    drivers_lic char   NOT NULL,
-    registr_dt char   NOT NULL,
+    registr_dt char   NOT NULL
+);
+
+CREATE TABLE ncvoterdist (
+    ncid char   NOT NULL,
     precinct_abbrv varchar   NOT NULL,
     precinct_desc varchar   NOT NULL,
     municipality_abbrv varchar   NOT NULL,
@@ -68,16 +81,16 @@ CREATE TABLE ncvoter11 (
     rescue_dist_abbrv varchar   NOT NULL,
     munic_dist_abbrv varchar   NOT NULL,
     dist_1_abbrv varchar   NOT NULL,
-    confidential_ind char   NOT NULL,
-    birth_year char   NOT NULL,
-    ncid char   NOT NULL,
     vtd_abbrv varchar   NOT NULL,
-    vtd_desc varchar   NOT NULL,
-    CONSTRAINT pk_ncvoter11 PRIMARY KEY (
-        ncid
-     )
+    vtd_desc varchar   NOT NULL
 );
 
-ALTER TABLE ncvoter11 ADD CONSTRAINT fk_ncvoter11_ncid FOREIGN KEY(ncid)
-REFERENCES ncvhis11 (ncid);
+ALTER TABLE ncvoterdemo ADD CONSTRAINT fk_ncvoterdemo_ncid FOREIGN KEY(ncid)
+REFERENCES ncvhis (ncid);
+
+ALTER TABLE ncvoterstatus ADD CONSTRAINT fk_ncvoterstatus_ncid FOREIGN KEY(ncid)
+REFERENCES ncvhis (ncid);
+
+ALTER TABLE ncvoterdist ADD CONSTRAINT fk_ncvoterdist_ncid FOREIGN KEY(ncid)
+REFERENCES ncvhis (ncid);
 
