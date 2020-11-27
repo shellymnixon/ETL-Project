@@ -1,5 +1,5 @@
 ﻿
-CREATE TABLE ncvhis (
+CREATE TABLE voter_hist (
     ncid varchar   NOT NULL,
     county_id int   NOT NULL,
     county_desc varchar   NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE ncvhis (
      )
 );
 
-CREATE TABLE ncvoterdemo (
+CREATE TABLE voter_demo (
     ncid varchar   NOT NULL,
     last_name varchar   NOT NULL,
     first_name varchar   NOT NULL,
@@ -38,30 +38,25 @@ CREATE TABLE ncvoterdemo (
     mail_state varchar   NOT NULL,
     mail_zipcode char   NOT NULL,
     full_phone_number varchar   NOT NULL,
-    confidential_ind char   NOT NULL,
     birth_year char   NOT NULL,
-    drivers_lic char   NOT NULL
-);
-
-CREATE TABLE ncvoterstatus (
-    ncid varchar   NOT NULL,
-    county_id int   NOT NULL,
-    voter_reg_num char   NOT NULL,
-    status_cd char   NOT NULL,
-    voter_status_desc varchar   NOT NULL,
-    reason_cd varchar   NOT NULL,
-    voter_status_reason_desc varchar   NOT NULL,
+    drivers_lic char   NOT NULL,
     race_code char   NOT NULL,
     ethnic_code char   NOT NULL,
     party_cd char   NOT NULL,
     gender_code char   NOT NULL,
     birth_age int   NOT NULL,
     birth_state varchar   NOT NULL,
-    registr_dt char   NOT NULL
+    registr_dt char   NOT NULL,
+    status_cd char   NOT NULL,
+     voter_reg_num char   NOT NULL,
+    voter_status_desc varchar   NOT NULL,
+    reason_cd varchar   NOT NULL,
+    voter_status_reason_desc varchar   NOT NULL
 );
 
-CREATE TABLE ncvoterdist (
+CREATE TABLE voter_dist (
     ncid char   NOT NULL,
+    county_id int   NOT NULL,
     precinct_abbrv varchar   NOT NULL,
     precinct_desc varchar   NOT NULL,
     municipality_abbrv varchar   NOT NULL,
