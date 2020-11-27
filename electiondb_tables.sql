@@ -1,5 +1,4 @@
-﻿
-CREATE TABLE voter_hist (
+﻿CREATE TABLE voter_hist (
     ncid varchar   NOT NULL,
     county_id int   NOT NULL,
     county_desc varchar   NOT NULL,
@@ -84,6 +83,26 @@ CREATE TABLE voter_identifiers (
     full_phone_number varchar   NOT NULL
 );
 
+CREATE TABLE county_codes (
+    county char   NOT NULL,
+    county_id int   NOT NULL
+);
+
+CREATE TABLE ethnic_codes (
+    ethnicity char   NOT NULL,
+    description char   NOT NULL
+);
+
+CREATE TABLE race_codes (
+    race char   NOT NULL,
+    description char   NOT NULL
+);
+
+CREATE TABLE status_codes (
+    status char   NOT NULL,
+    description char   NOT NULL
+);
+
 ALTER TABLE voter_demo ADD CONSTRAINT fk_voter_demo_ncid FOREIGN KEY(ncid)
 REFERENCES voter_hist (ncid);
 
@@ -92,4 +111,16 @@ REFERENCES voter_hist (ncid);
 
 ALTER TABLE voter_identifiers ADD CONSTRAINT fk_voter_identifiers_ncid FOREIGN KEY(ncid)
 REFERENCES voter_hist (ncid);
+
+ALTER TABLE county_codes ADD CONSTRAINT fk_county_codes_county_id FOREIGN KEY(county_id)
+REFERENCES voter_hist (county_id);
+
+ALTER TABLE ethnic_codes ADD CONSTRAINT fk_ethnic_codes_ethnicity FOREIGN KEY(ethnicity)
+REFERENCES voter_demo (ethnic_code);
+
+ALTER TABLE race_codes ADD CONSTRAINT fk_race_codes_race FOREIGN KEY(race)
+REFERENCES voter_demo (race_code);
+
+ALTER TABLE status_codes ADD CONSTRAINT fk_status_codes_status FOREIGN KEY(status)
+REFERENCES voter_demo (status_cd);
 
